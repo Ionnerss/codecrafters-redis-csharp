@@ -16,11 +16,11 @@ static async Task Main(string[] args) {
 }
 
 static void HandleClient(Socket client) {
-    using (client);
+    using (client)
     using (NetworkStream ns = new NetworkStream(client)) {
         byte[] buffer = new byte[1024];
-        while (true) {
-            int bytesRead = client.Receive(buffer);
+        int bytesRead = client.Receive(buffer);
+        while ((bytesRead = ns.Read(buffer, 0 , buffer.Length)) != 0) {
             if (bytesRead > 0) {
                 client.Send(Encoding.UTF8.GetBytes("+PONG\r\n"));
             }
