@@ -21,10 +21,7 @@ class ThreadedServer {
             byte[] buffer = new byte[1024];
             int bytesRead;
             while ((bytesRead = ns.Read(buffer, 0 , buffer.Length)) != 0) {
-                if (bytesRead > 0) {
-                    client.Send(Encoding.UTF8.GetBytes("+PONG\r\n"));
-                }
-                else break;
+                client.Send(Encoding.UTF8.GetBytes("+PONG\r\n"));
             }
         }
     }
